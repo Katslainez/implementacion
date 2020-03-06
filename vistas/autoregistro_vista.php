@@ -20,7 +20,9 @@
     <!-- Validacion del ojo -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <link rel="stylesheet" href="../vistas/plugins/sweetalert/dist/sweetalert2.min.css">
 
   <script src="../vistas/Js/jquery-3.4.1.min.js"></script>
 </head>
@@ -31,7 +33,7 @@
     </div>
   <div class="register-box-body">
     <p class="login-box-msg"></p>
-    <form action="../modelos/autoregistro_modelo.php" method="POST" name="Form_registrar">
+    <form action=" " method="POST" name="Form_registrar">
        
     <div class="form-group has-feedback">
       <!--<label for="inputEmail3" class="col-sm-2 control-label">Nombres</label>-->
@@ -71,6 +73,8 @@
 <script src="../vistas/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="../vistas/Js/Validaciones.js"></script>
+<script src="../vistas/plugins/sweetalert/dist/sweetalert2.all.min.js"></script>
 <script src="../vistas/plugins/iCheck/icheck.min.js"></script>
 </body>
 </html>
+<?php require"../modelos/autoregistro_modelo.php" ?>

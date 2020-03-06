@@ -1,9 +1,9 @@
 <?php
-session_start();
-$id_pre=$_POST["id_pre"];
-$respuesta=strtoupper($_POST["respuesta"]);
 try {
     require '../modelos/conectar.php';
+    if (isset($_POST['id_pre']) && isset($_POST['respuesta'])) {
+    $id_pre=$_POST["id_pre"];
+    $respuesta=strtoupper($_POST["respuesta"]);
             if (!isset($_SESSION['cont_preg'])){
             $_SESSION['cont_preg']=1;
              }  
@@ -19,7 +19,15 @@ try {
         $resultado1->execute(array(":id"=>$_SESSION["id_us"],"pre"=>$id_pre));
         $num_rows1 = $resultado1->fetchColumn();
         if ($num_rows1>0){ 
-            echo '<script>alert("LA PREGUNTA YA ESTA REGISTRADA SELECCIONE UNA DIFERENTE");window.location= "../vistas/preguntas_vista.php"</script>';
+           // echo '<script>alert("LA PREGUNTA YA ESTA REGISTRADA SELECCIONE UNA DIFERENTE");window.location= "../vistas/preguntas_vista.php"</script>';
+           echo '<script> Swal.fire({
+			position: "center",
+			icon: "error",
+			title: "LA PREGUNTA YA ESTÁ REGISTRADA, SELECCIONE UNA DIFERENTE",
+			showConfirmButton: false,
+			timer: 4000
+		  })
+		  </script>';
         }else{
            $sql2='INSERT INTO TBL_PREGUNTAS_USUARIO (PRE_CODIGO,USU_CODIGO,PREUSU_RESPUESTA) 
             VALUES (:id_pre,:id_usu,:respuesta)';
@@ -36,17 +44,23 @@ try {
                  ++$_SESSION['cont_preg'];
                  header('location:../vistas/preguntas_vista.php');
              }else {
-                echo '<script>alert("SE HA REGISTRADO LA PREGUNTAS Y RESPUESTAS CON EXITO");window.location="../vistas/cambiar_contra_vista.php"</script>';
+                //echo '<script>alert("SE HA REGISTRADO LA PREGUNTAS Y RESPUESTAS CON EXITO");window.location="../vistas/cambiar_contra_vista.php"</script>';
+                echo '<script>Swal.fire({
+                    title: "¡BIEN!",
+                    text: "SE HA REGISTRADO EXITOSAMENTE SUS PREGUNTAS Y RESPUESTAS",
+                    icon: "success",
+                    type: "success"
+                    }).then(function() {
+                    window.location = "../vistas/cambiar_contra_vista.php";
+                    });
+                </script>';
+
                 unset($_SESSION['cont_preg']);           
              }
             }
         }
-
-
-       
-   
         $resultado->closeCursor();
-    
+    }
 } catch (Exception $e) {
     die('Error: ' . $e->GetMessage());
     echo "Codigo del error" . $e->getCode();

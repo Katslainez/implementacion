@@ -18,30 +18,34 @@ $pass ="";
 for($i=0;$i<8;$i++) {
 $pass .=substr($caracteres,rand(0,53),1);
 }
-$idrol=2;
-$nombres= strtoupper ($_POST["nombres"]);
-$apellidos=strtoupper ( $_POST["apellidos"]);
-$usuario= strtoupper($_POST["usuario"]);
-$pass_cifrado=password_hash($pass,PASSWORD_DEFAULT,array("cost"=>12));
-$estado="NUEVO";
-$fecha_creacion= date("Y-m-d H:m:s");
-$fecha_vencimiento= date("Y-m-d H:m:s",strtotime("+1 years"));
 
-$correo= $_POST["correo"];
 
 	try{
-		
-      
-
 		require '../modelos/conectar.php';
+		if (isset($_POST['nombres']) && isset($_POST['apellidos'])&& isset($_POST['usuario'])&& isset($_POST['correo'])) {
+	 $idrol=2;
+     $nombres= strtoupper ($_POST["nombres"]);
+     $apellidos=strtoupper ( $_POST["apellidos"]);
+     $usuario= strtoupper($_POST["usuario"]);
+     $pass_cifrado=password_hash($pass,PASSWORD_DEFAULT,array("cost"=>12));
+     $estado="NUEVO";
+     $fecha_creacion= date("Y-m-d H:m:s");
+     $fecha_vencimiento= date("Y-m-d H:m:s",strtotime("+1 years"));
+     $correo= $_POST["correo"];
 		$consulta=$conexion->prepare("SELECT * FROM TBL_USUARIO WHERE USU_USUARIO='$usuario'");
         $consulta->execute();
         $num_rows = $consulta->fetchColumn();
-        
        if ($num_rows>0){ 
-		   echo '<script>alert("Usuario ya se encuentran registrado");window.location= "../vistas/autoregistro_vista.php"</script>';
-		    
-       }else{	
+		  //echo '<script>alert("Usuario ya se encuentran registrado");window.location= "../vistas/autoregistro_vista.php"</script>';	  
+		  echo '<script> Swal.fire({
+			position: "center",
+			icon: "error",
+			title: "USUARIO YA SE ENCUENTRA REGISTRADO",
+			showConfirmButton: false,
+			timer: 3000
+		  })
+		  </script>';
+		}else{
 		$template_correo=file_get_contents('../vistas/template_correo.php');
 		$template_correo=str_replace("{{pass}}",$pass,$template_correo);
 		$template_correo=str_replace("{{year}}",date('Y'),$template_correo);
@@ -72,15 +76,31 @@ $correo= $_POST["correo"];
 	   $resultado=$conexion->prepare($sql);	
        $resultado->execute(array(":rol"=>$idrol,":usuario"=>$usuario,":nombres"=>$nombres,":apellidos"=>$apellidos,":contra"=>$pass_cifrado,":estado"=>$estado,":fecha_creacion" =>$fecha_creacion, ":fecha_vencimiento"=>$fecha_vencimiento,":correo"=>$correo));
 	   if ($resultado) {
-		echo '<script>alert("Se ha registrado exitosamente,revise su correo electronico");window.location= "../vistas/login_vista.php"</script>';
-			
+		//echo '<script>alert("Se ha registrado exitosamente,revise su correo electronico");window.location= "../vistas/login_vista.php"</script>';
+		echo '<script>Swal.fire({
+			title: "¡BIEN!",
+			text: "SE HA REGISTRADO EXITOSAMENTE, REVISE SU CORREO ELECTRÓNICO",
+			icon: "success",
+			type: "success"
+			}).then(function() {
+			window.location = "../vistas/login_vista.php";
+			});
+		</script>';
 	   } else {
-		echo '<script>alert("Error al registrarse");window.location= "../vistas/autoregistro_vista.php"</script>';	
+		//echo '<script>alert("Error al registrarse");window.location= "../vistas/autoregistro_vista.php"</script>';	
+		echo '<script> Swal.fire({
+			position: "center",
+			icon: "Error",
+			title: "¡ALGO SALIÓ MAL!",
+			text:"ERROR AL REGISTRARSE",
+			showConfirmButton: false,
+			timer: 3000
+		  })
+		  </script>';
 		}
-	
-		
 		$resultado->closeCursor();
 	}
+	  }
 	}catch(Exception $e){			
 		
         die('Error: ' . $e->GetMessage());

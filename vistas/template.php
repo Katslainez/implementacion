@@ -45,7 +45,7 @@ width: 100% !important; height: 100%; margin: 0; line-height: 1.4; background-co
                   <tr>
                     <td class="content-cell" style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; padding: 35px; word-break: break-word;">
                       <h1 style="box-sizing: border-box; color: #2F3133; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 19px; font-weight: bold; margin-top: 0;" align="left">Hola, {{name}}</h1>
-                      <p style="box-sizing: border-box; color: #74787E; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 16px; line-height: 1.5em; margin-top: 0;" align="left">Recientemente solicitó restablecer su contraseña para su cuenta en Systen32. Use el botón de abajo para reiniciarlo. Este restablecimiento de contraseña solo es válido durante las próximas 24 horas.</strong></p>
+                      <p style="box-sizing: border-box; color: #74787E; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 16px; line-height: 1.5em; margin-top: 0;" align="left">Recientemente solicitó restablecer su contraseña para su cuenta en System32. Use el botón de abajo para reiniciarlo. Este restablecimiento de contraseña solo es válido durante las próximas 24 horas.</strong></p>
                       
                       <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0" style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; margin: 30px auto; padding: 0; text-align: center; width: 100%;">
                         <tr>

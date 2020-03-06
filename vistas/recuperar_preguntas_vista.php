@@ -29,7 +29,7 @@ $resultado2->execute(array(":id"=>NULL,":usuc"=>$_SESSION["id_u"],":objeto"=>8,"
   <link rel="stylesheet" href="../vistas/dist/css/AdminLTE.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="../vistas/plugins/iCheck/square/blue.css">
-
+  <link rel="stylesheet" href="../vistas/Plugins/sweetalert/dist/sweetalert2.min.css">
   <script src="../vistas/Js/jquery-3.4.1.min.js"></script>
 </head>
 <body class="hold-transition register-page">
@@ -40,7 +40,7 @@ $resultado2->execute(array(":id"=>NULL,":usuc"=>$_SESSION["id_u"],":objeto"=>8,"
   <div class="register-box-body">
     <p style="text-align: justify">Ingrese una pregunta y una respuesta de las que recuerde haber registrado para restablecer contraseña</p><br>
 
-    <form action="../modelos/recuperar_preguntas_modelo2.php" method="POST" name="form_recu" >
+    <form action=" " method="POST" name="form_recu" >
     <div class="form-group has-feedback">
     <select class="form-control" name="id_pre2" id="combox2">
         <option value="0">SELECCIONE UNA PREGUNTA:</option>
@@ -51,7 +51,6 @@ $resultado2->execute(array(":id"=>NULL,":usuc"=>$_SESSION["id_u"],":objeto"=>8,"
             echo '<option value="'.$registro["PRE_CODIGO"].'">'.$registro["PRE_NOMBRE"].'</option>';
           }
         ?>
-       
       </select>
       </div>
     <div class="form-group has-feedback">
@@ -78,7 +77,9 @@ $resultado2->execute(array(":id"=>NULL,":usuc"=>$_SESSION["id_u"],":objeto"=>8,"
 <script src="../vistas/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="../vistas/Js/Validaciones.js"></script>
-
+<script src="../vistas/plugins/sweetalert/dist/sweetalert2.all.min.js"></script>
 <script src="../vistas/plugins/iCheck/icheck.min.js"></script>
 </body>
 </html>
+
+<?php require"../modelos/recuperar_preguntas_modelo2.php" ?>

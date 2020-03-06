@@ -16,6 +16,8 @@ require '../controladores/funciones.php';
 $mail = new PHPMailer(true);
 
 try{
+
+    if (isset($_POST['usuario2'])) {
     $usuario2=strtoupper(htmlentities(addslashes($_POST["usuario2"])));
     $token=generar_token();
     $fecha_ven_token=date('Y-m-d H:m:s',strtotime('+24 hours'));
@@ -29,7 +31,16 @@ try{
         $num_rows = $resultado->fetchColumn();
             
         if ($num_rows==0){ 
-            echo '<script>alert("INTENTELO DE NUEVO");window.location= "../vistas/recuperar_correo.php"</script>';
+            //echo '<script>alert("INTENTELO DE NUEVO");window.location= "../vistas/recuperar_correo.php"</script>';
+            echo '<script> Swal.fire({
+                position: "center",
+                icon: "Error",
+                title: "¡ALGO SALIÓ MAL!",
+                text:"INTENTELO DE NUEVO",
+                showConfirmButton: false,
+                timer: 3000
+              })
+              </script>';
         }else{
     
             $sql2="UPDATE TBL_USUARIO SET USU_TOKEN=:token,USU_FECHA_TOKEN=:fecha_vencimiento WHERE USU_USUARIO=:usuario2";
@@ -59,7 +70,7 @@ try{
 						$resultado9->execute(array(":id"=>NULL,":usuc"=>$_SESSION["id_usu"],":objeto"=>6,":accion"=>'CONSULTA',":descr"=>'VERIFICA LAS CREDENCIALES DEL USUARIO',":fecha"=>date("Y-m-d H:m:s")));
          $template=file_get_contents('../vistas/template.php');
          $template=str_replace("{{name}}",$_SESSION['usu'],$template);
-         $template=str_replace("{{action_url_1}}","http://localhost:8080/clime-home/vistas/restablecer_contraseña.php?'.$token.'",$template);
+         $template=str_replace("{{action_url_1}}","http://localhost:8080/implementacion/vistas/restablecer_contraseña.php?'.$token.'",$template);
          $template=str_replace("{{year}}",date('Y'),$template);
           //Configuración del servidor
         $mail->SMTPDebug = 0;                       // Habilitar salida de depuración detallada
@@ -90,13 +101,18 @@ try{
     
         $mail->send();
 
-        echo '<script>alert("SE HA ENVIADO UN CORREO ELECTRONICO PARA EL CAMBIO DE CONTRASEÑA. POR FAVOR VERIFICA LA INFORMACION ENVIADA.");window.location= "../vistas/recuperar_correo.php"</script>';
-    
-            $num_rows->closeCursor();
-            $resultado2->closeCursor();
-            $resultado3->closeCursor();  
-  
-
+        //echo '<script>alert("SE HA ENVIADO UN CORREO ELECTRONICO PARA EL CAMBIO DE CONTRASEÑA. POR FAVOR VERIFICA LA INFORMACION ENVIADA.");window.location= "../vistas/recuperar_correo.php"</script>';
+        echo '<script>Swal.fire({
+			title: "BIEN!",
+			text: "SE HA ENVIADO UN CORREO CORREO ELECTRÓNICO PARA EL CAMNBIO DE CONTRASEÑA. POR FAVOR VERIFIQUE LA INFORMACIÓN",
+			icon: "success",
+			type: "success"
+			}).then(function() {
+			window.location = "../vistas/recuperar_correo.php";
+			});
+        </script>';
+    }
+        
 }catch(Exception $e){
     die('Error: ' . $e->GetMessage());
     echo "Codigo del error" . $e->getCode();

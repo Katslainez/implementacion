@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="../vistas/dist/css/AdminLTE.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="../vistas/plugins/iCheck/square/blue.css">
-
+  <link rel="stylesheet" href="../vistas/Plugins/sweetalert/dist/sweetalert2.min.css">
   <script src="../vistas/Js/jquery-3.4.1.min.js"></script>
 </head>
 <body class="hold-transition register-page">
@@ -25,7 +25,7 @@
     <b>Recuperar Contraseña</b>
   </div>
   <div class="register-box-body">
-    <p class="login-box-msg">RECUPERAR CONTRASEÑA</p>
+    <p class="login-box-msg">INGRESE SU USUARIO</p>
 
     <form  method="POST" name="Form_recuperar">
     <div class="form-group has-feedback">
@@ -37,12 +37,12 @@
       <div class="row">
       <div id ="alerta3"></div>
         <div class="col text-center">
-        <div><button type="button" name="correo" class="btn btn-primary btn-correo"onclick="Validar_recuperar(); document.Form_recuperar.action = '../modelos/recuperar_correo_modelo.php'; document.Form_recuperar.submit()">RECUPERAR POR CORREO</button>
+        <div><button type="button" name="correo" class="btn btn-primary btn-correo"onclick="Validar_recuperar(); document.Form_recuperar.action = ' '; document.Form_recuperar.submit()">RECUPERAR POR CORREO</button>
         </div>
       </div>
       <br>
       <div class="col text-center">
-        <div><button type="button" name="preguntas" class="btn btn-primary btn-preguntas "onclick="Validar_recuperar();document.Form_recuperar.action = '../modelos/recuperar_preguntas_modelo.php'; document.Form_recuperar.submit()">RECUPERAR POR PREGUNTAS</button>
+        <div><button type="button" name="preguntas" class="btn btn-primary btn-preguntas "onclick="Validar_recuperar();document.Form_recuperar.action = ' '; document.Form_recuperar.submit()">RECUPERAR POR PREGUNTAS</button>
         </div>
       </div>
     </form>
@@ -55,7 +55,13 @@
 <script src="../vistas/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="../vistas/Js/Validaciones.js"></script>
-
+<script src="../vistas/plugins/sweetalert/dist/sweetalert2.all.min.js"></script>
 <script src="../vistas/plugins/iCheck/icheck.min.js"></script>
 </body>
 </html>
+<?php require"../modelos/recuperar_correo_modelo.php" ?>
+<?php require"../modelos/recuperar_preguntas_modelo.php" ?>
+
+
+
+

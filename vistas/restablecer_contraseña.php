@@ -33,6 +33,7 @@ $resultado2->execute(array(":id"=>NULL,":usuc"=>$_SESSION["id_usu"],":objeto"=>7
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="../vistas/Plugins/sweetalert/dist/sweetalert2.min.css">
   <script src="../vistas/Js/jquery-3.4.1.min.js"></script>
 </head>
 <body class="hold-transition register-page">
@@ -43,7 +44,7 @@ $resultado2->execute(array(":id"=>NULL,":usuc"=>$_SESSION["id_usu"],":objeto"=>7
   <div class="register-box-body">
     <p class="login-box-msg">INGRESE LOS SIGUIENTES DATOS</p>
 
-    <form action="../modelos/restablecer_modelo.php" method="POST" name="Form_reestablecer">
+    <form action=" " method="POST" name="Form_reestablecer">
     <div class="form-group has-feedback">
        <div class="input-group">
         <input id="nueva_contra" autocomplete="off" type="password" class="form-control nombres" placeholder="NUEVA CONTRASEÑA" name="nueva_contra">
@@ -83,7 +84,9 @@ $resultado2->execute(array(":id"=>NULL,":usuc"=>$_SESSION["id_usu"],":objeto"=>7
 <script src="../vistas/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="../vistas/Js/Validaciones.js"></script>
+<script src="../vistas/plugins/sweetalert/dist/sweetalert2.all.min.js"></script>
 
 <script src="../vistas/plugins/iCheck/icheck.min.js"></script>
 </body>
 </html>
+<?php require"../modelos/restablecer_modelo.php" ?>

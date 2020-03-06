@@ -1,11 +1,12 @@
 <?php
 
 try{
+	require '../modelos/conectar.php';
+	if (isset($_POST['login']) && isset($_POST['contra2'])) {
 	$login=strtoupper(htmlentities(addslashes($_POST["login"])));
 	$password=htmlentities(addslashes($_POST["contra2"]));
 	$estado='BLOQUEADO';
 	$contador=0;
-	require '../modelos/conectar.php';
 	$sql="SELECT * FROM TBL_USUARIO WHERE USU_USUARIO= :login";
 	$resultado=$conexion->prepare($sql);	
 	$resultado->execute(array(":login"=>$login));
@@ -62,13 +63,20 @@ try{
 						VALUES (:id,:usuc,:objeto,:accion,:descr,:fecha)";
 						$resultado11=$conexion->prepare($sql11);	
 						$resultado11->execute(array(":id"=>NULL,":usuc"=>$_SESSION["id_us"],":objeto"=>2,":accion"=>'CONSULTA',":descr"=>'VERIFICA LAS CREDENCIALES DEL USUARIO',":fecha"=>date("Y-m-d H:m:s")));
-						
-						header("location:../vistas/index.php");
+					header("location:../vistas/index.php");
+					
 					}elseif ($_SESSION["est"]=="BLOQUEADO" ) {
-						header("location:../vistas/login_vista.php");
+						echo '<script> Swal.fire({
+							position: "center",
+							icon: "info",
+							title: "SU USUARIO HA SIDO BLOQUEADO. CONTACTE CON EL ADMINISTRADOR",
+							showConfirmButton: false,
+							timer: 3000
+						  })
+						  </script>';    
+						//header("location:../vistas/login_vista.php");
 					}
 		
-			
 			/*if ($_SESSION["est"]) {
                     switch ($_SESSION["est"]) {
 					case 'NUEVO': 
@@ -96,19 +104,35 @@ try{
 				
 				if ($_SESSION['cont_inte']<$_SESSION['parametro']){
 					++$_SESSION['cont_inte'];
-					echo '<script>alert("USUARIO O CONTRASEÑA INCORRECTA ");window.location= "../vistas/login_vista.php"</script>';
+					//echo '<script>alert("USUARIO O CONTRASEÑA INCORRECTA ");window.location= "../vistas/login_vista.php"</script>';
+					echo '<script> Swal.fire({
+						position: "center",
+						icon: "error",
+						title: "USUARIO O CONTRASEÑA INCORRECTA",
+						showConfirmButton: false,
+						timer: 3000
+					  })
+					  </script>';
 				}else {
 					$sql3=("UPDATE TBL_USUARIO SET  USU_ESTADO=:estado WHERE USU_USUARIO=:usu");
 					$resultado3=$conexion->prepare($sql3);
 					$resultado3->execute(array(":estado"=>$estado,":usu"=>$login));
 					unset($_SESSION['cont_inte']); 
-				   echo '<script>alert("Has superado el número de intentos y el acceso a esta cuenta ha sido bloqueado. Contacta con el administrador");window.location="../vistas/login_vista.php"</script>';
-				             
+				   //echo '<script>alert("Has superado el número de intentos y el acceso a esta cuenta ha sido bloqueado. Contacta con el administrador");window.location="../vistas/login_vista.php"</script>';
+				   echo '<script> Swal.fire({
+					position: "center",
+					icon: "warning",
+					title: "HAZ SUPERADO EL NÚMERO DE INTENTOS Y EL ACCESO A ESTA CUENTA HA SIDO BLOQUEADO. CONTACTE CON EL ADMINISTRADOR",
+					showConfirmButton: false,
+					timer: 5000
+				  })
+				  </script>';     
 				}
 			   
 		}
 		$resultado->closeCursor();
 		
+		}
 }catch(Exception $e){
     die('Error: ' . $e->GetMessage());
     echo "Codigo del error" . $e->getCode();
