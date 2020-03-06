@@ -79,7 +79,7 @@ $pass .=substr($caracteres,rand(0,53),1);
 		//echo '<script>alert("Se ha registrado exitosamente,revise su correo electronico");window.location= "../vistas/login_vista.php"</script>';
 		echo '<script>Swal.fire({
 			title: "¡BIEN!",
-			text: "SE HA REGISTRADO EXITOSAMENTE, REVISE SU CORREO ELECTRÓNICO",
+			text: "SE HA REGISTRADO EXITOSAMENTE, REVISE SU CORREO ELECTRÓNICO.",
 			icon: "success",
 			type: "success"
 			}).then(function() {
